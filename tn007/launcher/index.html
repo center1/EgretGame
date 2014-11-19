@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>心心相印</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no,target-densitydpi=device-dpi"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <meta name="full-screen" content="true"/>
+    <meta name="screen-orientation" content="portrait"/>
+    <meta name="x5-fullscreen" content="true"/>
+    <meta name="360-fullscreen" content="true"/>
+    <base href="../"/>
+
+    <style>
+        body {
+            text-align: center;
+            background: #000000;
+            padding: 0;
+            border: 0;
+            margin: 0;
+            height: 100%;
+        }
+
+        html {
+            -ms-touch-action: none; /* Direct all pointer events to JavaScript code. */
+        }
+    </style>
+</head>
+<body>
+<div style="display:inline-block;width:100%; height:100%;margin: 0 auto; background: black; position:relative;"
+     id="gameDiv">
+    <canvas id="gameCanvas" width="480" height="800" style="background-color: #000000"></canvas>
+</div>
+<script>var document_class = "GameApp";</script><!--这部分内容在编译时会被替换，要修改文档类，请到工程目录下的egretProperties.json内编辑。-->
+<script src="launcher/egret_loader.js"></script>
+<script src="launcher/game-min.js"></script>
+<script src="launcher/WeixinAPI.js"></script>
+<script>
+    var wxData = {
+        "appId": "", // 服务号可以填写appId
+        "imgUrl" : 'http://heart7.jd-app.com/resource/assets/icon.png',
+        "link" : 'http://heart7.jd-app.com/launcher/index.html',
+        "desc" : '七夕快乐，我已经把我的爱心传递给她（他）了，你呢？',
+        "title" : "心心相印"
+    };
+    WeixinApi.ready(function(Api) {
+        // 微信分享的数据
+        // 分享的回调
+        var wxCallbacks = {
+            // 分享失败了
+            fail : function(resp) {
+                // 分享失败了，是不是可以告诉用户：不要紧，可能是网络问题，一会儿再试试？
+                alert("分享失败,可能是网络问题，再试试。");
+            }
+        };
+
+        // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+        Api.shareToFriend(wxData, wxCallbacks);
+
+        // 点击分享到朋友圈，会执行下面这个代码
+        Api.shareToTimeline(wxData, wxCallbacks);
+
+        // 点击分享到腾讯微博，会执行下面这个代码
+        Api.shareToWeibo(wxData, wxCallbacks);
+
+        // 有可能用户是直接用微信“扫一扫”打开的，这个情况下，optionMenu、toolbar都是off状态
+        // 为了方便用户测试，我先来trigger show一下
+        // optionMenu
+        var elOptionMenu = document.getElementById('optionMenu');
+        elOptionMenu.click(); // 先隐藏
+        elOptionMenu.click(); // 再显示
+        // toolbar
+        var elToolbar = document.getElementById('toolbar');
+        elToolbar.click(); // 先隐藏
+        elToolbar.click(); // 再显示
+    });
+
+    egret_h5.startGame();
+</script>
+</body>
+</html>

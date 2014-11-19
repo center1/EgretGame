@@ -1,0 +1,15 @@
+{
+"resources":
+	[
+		{"name":"bg1Image","type":"image","url":"assets/star1.jpg"},
+      	{"name":"btnStart","type":"image","url":"assets/btn_start.png"},
+		{"name":"star","type":"image","url":"assets/star.png"},
+        {"name":"winner","type":"image","url":"assets/winner.gif"},
+        {"name":"go1","type":"image","url":"assets/go.png"}
+	],
+
+"groups":
+	[
+        {"name":"preload","keys":"bg1Image,btnStart,star,go1,winner"}
+	]
+}
